@@ -1,0 +1,7 @@
+README.txt
+setup.py
+vyshka.py
+vyshka.egg-info/PKG-INFO
+vyshka.egg-info/SOURCES.txt
+vyshka.egg-info/dependency_links.txt
+vyshka.egg-info/top_level.txt
