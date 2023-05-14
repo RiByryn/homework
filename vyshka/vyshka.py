@@ -72,7 +72,7 @@ class Tournament:
                 for match in tour:
                     team_1 = group_teams[match[0] - 1]
                     team_2 = group_teams[match[1] - 1]
-                    tour_list.append(
+                    tour_list.append((
                         team_1,
                         team_2,
                         self.score_match_result(
@@ -82,13 +82,24 @@ class Tournament:
                             all_results[tour][team_1],
                             all_results[tour][team_2],
                         )
-                    )
+                    ))
                     group.append(tour_list)
             bracket.append(group)
         return bracket
 
     def score_match_result(self, result_team_1, result_team_2):
-
+        points_1 = 0
+        points_2 = 0
+        for i in result_team_1:
+            if (i in result_team_2) and (result_team_1[i] == result_team_2[i]):
+                points_1 += 1
+                points_2 += 1
+            elif (i in result_team_2) and (result_team_1[i] > result_team_2[i]):
+                points_1 += 2
+            elif (i in result_team_2) and (result_team_2[i] > result_team_1[i]):
+                points_2 += 2
+        match_result = f'{points_1} : {points_2}'
+        return match_result
 
 tournament = Tournament(num_groups=2, num_teams=8)
 tournament.read_teams_from_file('teams.txt')
