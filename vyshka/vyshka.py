@@ -63,7 +63,7 @@ class Tournament:
             bracket.append(group)
         return bracket
 
-    def score_all_tours(self, bracket_tour, all_results):
+    def score_all_tours(self, all_results):
         bracket = []
         for group_teams in self.teams:
             group = []
@@ -76,11 +76,8 @@ class Tournament:
                         team_1,
                         team_2,
                         self.score_match_result(
-                            team_1,
-                            team_2,
-                            self.calendar.index(tour),
-                            all_results[tour][team_1],
-                            all_results[tour][team_2],
+                            all_results[group.index(tour)][team_1],
+                            all_results[group.index(tour)][team_2],
                         )
                     ))
                     group.append(tour_list)
@@ -118,7 +115,7 @@ for idx, group in enumerate(bracket_tour):
         for match in tour:
             print(f'{match[0]} VS {match[1]}')
         print()
-tour_results = tournament.score_all_tours(bracket_tour, all_results)
+tour_results = tournament.score_all_tours(all_results)
 for idx, group in enumerate(tour_results):
     print(f'Группа {chr(ord("A") + idx)}: \n')
     for tour_idx, tour in enumerate(group):
